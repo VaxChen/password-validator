@@ -2,6 +2,10 @@ package com.example.canad.password_validator;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android. widget.Button;
+import android. widget. EditText;
+import android.widget.TextView;
 
 public class Validator extends AppCompatActivity {
 
@@ -42,9 +46,34 @@ public class Validator extends AppCompatActivity {
         return result;
     }
 
+    EditText editText;
+    TextView textView;
+    Button button;
         @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_validator);
+        // get the Intent that started this activity and extract the String
+
+            editText=(EditText) findViewById(R.id.editText);
+            textView=(TextView) findViewById(R.id.textView);
+            button=(Button) findViewById(R.id.button);
+            button.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View view){
+
+                    String password=editText.getText().toString();
+                    int result = validate(password);
+                    if(result==5)
+                        textView.setText("Strong");
+                    else if(result>2)
+                        textView.setText("Not Strong");
+                    else
+                        textView.setText("Weak");
+                }
+            });
+
     }
+
+
 }
